@@ -60,14 +60,15 @@ that can be tabulated by "esttab" or "estout".
 */
 
 
-/*
+// run summary statistics, and make it available for tabulation with esttab
 estpost sum Medicaid medicare health_insurance_job no_health_insruance lgbtq us_born income ///
-hours_worked spanish_home edu_nohs edu_somecol edu_trade deny_service not_treatment 
-*/
+hours_worked spanish_home edu_nohs edu_somecol edu_trade deny_service not_treatment  
+
 
 
 //esttab ., cells("mean sd count") noobs
 //esttab, cells("mean sd min max") nomtitle nonumber
+
 
 //esttab using summary_table.tex, replace
 
@@ -77,6 +78,9 @@ tex ///
 label
 //title("Descriptive Statistics Summary") label
 */
+
+esttab using summary_table.tex, replace label nostar title("Descriptive Statistics Summary"\label{tab1})
+
 
 // Summary statistics can also be posted by estpost tabstat. 
 //esttab, cells("medicaid medicare health_insurance_job") nomtitle nonumber
