@@ -22,6 +22,7 @@ hours_worked spanish_home edu_nohs edu_somecol edu_trade deny_service not_treatm
 
 /*
 ===
+
 What is esttab, estout, eststo?
 
 ***esttab - is a command used for creating formatted tables of results. It's part
@@ -54,8 +55,6 @@ you to9 capture the output of non-estimation commands and store them in a format
 that can be tabulated by "esttab" or "estout".
 
 
-
-
 ===
 */
 
@@ -65,25 +64,15 @@ estpost sum Medicaid medicare health_insurance_job no_health_insruance lgbtq us_
 hours_worked spanish_home edu_nohs edu_somecol edu_trade deny_service not_treatment  
 
 
-
 //esttab ., cells("mean sd count") noobs
 //esttab, cells("mean sd min max") nomtitle nonumber
-
-
-//esttab using summary_table.tex, replace
+//esttab using summary_table.tex, replace label nostar title("Descriptive Statistics Summary"\label{tab1})
 
 /*
-esttab using summary_table.tex, replace ///
-tex ///
-label
-//title("Descriptive Statistics Summary") label
+esttab using summary_table.tex, replace tex label title("Descriptive Statistics Summary") ///
+cells("mean sd min max") noobs
 */
 
-esttab using summary_table.tex, replace label nostar title("Descriptive Statistics Summary"\label{tab1})
+esttab using summary_table.tex, replace tex label title("Descriptive Statistics Summary") ///
+cells("mean sd min max") noobs star se p addnotes("Significance levels: \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)")
 
-
-// Summary statistics can also be posted by estpost tabstat. 
-//esttab, cells("medicaid medicare health_insurance_job") nomtitle nonumber
-
-// Now to create a table to be included in a LaTex document
-//eststo: regress Medicaid medicare health_insurance_job no_health_insruance lgbtq us_born income hours_worked spanish_home edu_nohs edu_somecol edu_trade deny_service not_treatment 
